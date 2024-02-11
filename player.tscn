@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://csof4k6cwe5qk"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_kdm8m"]
+[ext_resource type="Texture2D" uid="uid://cq3sndjrbkwak" path="res://art/steve.png" id="2_j42ko"]
+[ext_resource type="Script" path="res://Scoring.gd" id="3_wdyg7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcwvu"]
+atlas = ExtResource("2_j42ko")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nurxg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcwvu")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_45an5"]
+radius = 7.0
+height = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_brn5t"]
+radius = 38.5032
+
+[node name="Player" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_kdm8m")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nurxg")
+animation = &"down"
+
+[node name="DamageBody" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_45an5")
+
+[node name="Scoring" type="Area2D" parent="."]
+script = ExtResource("3_wdyg7")
+
+[node name="ScoringShape2D" type="CollisionShape2D" parent="Scoring"]
+shape = SubResource("CircleShape2D_brn5t")
+debug_color = Color(0.0823529, 0.603922, 0.666667, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Scoring" to="." method="_on_scoring_body_entered"]

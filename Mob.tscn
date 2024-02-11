@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf1tnhvsnawel"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_2br2j"]
+[ext_resource type="Texture2D" uid="uid://duqvxpn0c0y12" path="res://art/summer_pine_tree_tiles.png" id="2_kqskk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh75r"]
+atlas = ExtResource("2_kqskk")
+region = Rect2(88, 192, 88, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a73js"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh75r")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsiqd"]
+radius = 7.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q5m4v"]
+radius = 213.809
+
+[node name="Mob" type="RigidBody2D"]
+scale = Vector2(2, 2)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_2br2j")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -17.25)
+scale = Vector2(2.42045, 2.53906)
+sprite_frames = SubResource("SpriteFrames_a73js")
+animation = &"stand"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rsiqd")
+
+[node name="ScoringArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoringArea"]
+shape = SubResource("CircleShape2D_q5m4v")
