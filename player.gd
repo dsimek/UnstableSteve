@@ -5,6 +5,8 @@ signal score
 @export var speed = 400
 var screen_size
 
+@onready var hitTreeSound = $Hit
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -44,6 +46,7 @@ func _process(delta):
 
 
 func _on_body_entered(body):
+	hitTreeSound.play()
 	print(get_node("Scoring/ScoringShape2D") == body)
 	print(body.name)
 	hide()

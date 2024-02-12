@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbptthj6e3hn4"]
+[gd_scene load_steps=7 format=3 uid="uid://bbptthj6e3hn4"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ekgjn"]
 [ext_resource type="PackedScene" uid="uid://csof4k6cwe5qk" path="res://player.tscn" id="1_i4qg6"]
 [ext_resource type="PackedScene" uid="uid://bf1tnhvsnawel" path="res://Mob.tscn" id="2_68lb1"]
 [ext_resource type="PackedScene" uid="uid://b2hpwa3kqolhe" path="res://hud.tscn" id="4_0ga4t"]
+[ext_resource type="AudioStream" uid="uid://cgm18sr830g8b" path="res://audio/quack.mp3" id="5_uivre"]
 
 [sub_resource type="Curve2D" id="Curve2D_utqdb"]
 _data = {
@@ -16,6 +17,10 @@ script = ExtResource("1_ekgjn")
 mob_scene = ExtResource("2_68lb1")
 
 [node name="Player" parent="." instance=ExtResource("1_i4qg6")]
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+stream = ExtResource("5_uivre")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
